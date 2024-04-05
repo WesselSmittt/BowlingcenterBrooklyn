@@ -38,8 +38,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                                         <a href="{{ route('reserveren.show', $reservation->id) }}" class="text-indigo-600 hover:text-indigo-900">👁️</a>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium ">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">❌</a>
+                                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                        <form action="{{ route('reserveren.destroy', $reservation->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-indigo-600 hover:text-indigo-900">❌</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

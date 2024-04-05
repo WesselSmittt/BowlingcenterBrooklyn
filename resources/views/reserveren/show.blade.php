@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <p>Start Time: {{ $reservation->start_time }}</p>
                     <p>End Time: {{ $reservation->end_time }}</p>
+                    <p>Price: {{ $reservation->tariff->product_price }}</p>
                     <!-- Add more fields as necessary -->
                 </div>
             </div>
