@@ -59,7 +59,9 @@ class MedewerkersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reservation = DB::table('reservations')->where('id', $id)->first();
+
+        return view('medewerkers.edit', ['reservation' => $reservation]);
     }
 
     /**

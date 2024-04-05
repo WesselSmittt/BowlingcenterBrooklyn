@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medewerkers.index');
     Route::get('/mederwerkers/user/{id}', [MedewerkersController::class, 'userReservations'])->name('allreservations.user');
+    Route::get('/reservation/{id}/edit', 'ReservationsController@edit')->name('reservations.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

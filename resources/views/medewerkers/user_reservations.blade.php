@@ -51,6 +51,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->total_childs }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->total_adults }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->menu_id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->menu_id }}</td>
                             </tr>
                             @endforeach
                         </tbody>
