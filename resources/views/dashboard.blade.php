@@ -36,7 +36,7 @@
                                         {{ $reservation->end_time }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">👁️</a>
+                                        <a href="{{ route('reserveren.show', $reservation->id) }}" class="text-indigo-600 hover:text-indigo-900">👁️</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium ">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">❌</a>

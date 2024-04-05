@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/reserveren', [ReserverenController::class, 'index'])->name('reserveren.index');
     Route::post('/reserveren', [ReserverenController::class, 'store'])->name('reserveren.store');
+    Route::get('/reserveren/{id}', [ReserverenController::class, 'show'])->name('reserveren.show');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
