@@ -30,7 +30,7 @@ class MenuController extends Controller
     {
         $menu = Menu::create($request->all());
 
-        return redirect()->route('menu.index');
+        return redirect()->route('menu.index'); 
     }
 
     /**
@@ -38,7 +38,10 @@ class MenuController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $menu = Menu::find($id);
+        $price = $menu->product->price;
+
+        return view('menu.show', ['menu' => $menu, 'price' => $price]);
     }
 
     /**
