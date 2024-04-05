@@ -17,7 +17,11 @@ class MenuFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'column1' => $this->faker->sentence,
+            'column2' => $this->faker->sentence,
+            'column3' => $this->faker->sentence,
+            'column4' => $this->faker->sentence,
+            // Voeg meer kolommen toe indien nodig
         ];
     }
 }

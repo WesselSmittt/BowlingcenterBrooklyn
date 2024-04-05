@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('birthdate');
             $table->string('email')->unique();
-            $table->string('phone_number');
-            $table->string('role');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->date('birthdate')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('role')->default('klant');
             $table->timestamps();
         });
     }
@@ -30,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+

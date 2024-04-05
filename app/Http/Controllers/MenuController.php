@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -11,7 +11,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('menu.index');
+        $menus = Menu::all();
+        return view('menu.index', ['menus' => $menus]);
     }
 
     /**
@@ -27,7 +28,9 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $menu = Menu::create($request->all());
+
+        return redirect()->route('menu.index');
     }
 
     /**
