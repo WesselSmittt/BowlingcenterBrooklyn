@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
     Route::get('/menu/create', [App\Http\Controllers\MenuController::class, 'create'])->name('menu.create');
     Route::post('/menu', [App\Http\Controllers\MenuController::class, 'store'])->name('menu.store');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/menu/{id}', [App\Http\Controllers\MenuController::class, 'destroy'])->name('menu.destroy');    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

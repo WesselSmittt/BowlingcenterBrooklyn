@@ -13,9 +13,9 @@ class Menu extends Model
     protected $table = 'menu';
     protected $fillable = ['name', 'price', 'category'];
 
-    public function products()
+    public function product()
     {
-    return $this->hasMany(product::class);
+        return $this->belongsTo(Product::class);
     }
 }
 

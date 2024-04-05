@@ -1,28 +1,107 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Menu') }}
-        </h2>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <a href="{{ route('product.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
-            Nieuw product toevoegen
-        </a>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 flex flex-wrap">
-                <form action="{{ route('menu.store') }}" method="POST">
-                    @csrf
-                    <label for="product_name">Product naam:</label>
-                    <input type="text" id="products_name" name="product_name">
-                    <label for="price">Prijs:</label>
-                    <input type="text" id="price" name="price">
-                    <label for="categories">Categorie:</label>
-                    <input type="text" id="categories" name="categories">
-                    <!-- Voeg meer velden toe voor elke kolom in uw menu tabel -->
-                    <input type="submit" value="Submit">
-                </form>
+                    <div class="w-1/2 p-3">
+                    <table class="table-auto w-full mb-6">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2">Naam</th>
+                                <th class="px-4 py-2">Prijs</th>
+                                <th class="px-4 py-2">Categorie</th>
+                                <!-- Add other columns... -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($products as $product)
+                            @if ($product->category && $product->category->id == 1)
+                                <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
+                                    <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                                    <td class="border px-4 py-2">{{ $product->price }}</td>
+                                    <td class="border px-4 py-2">{{ $product->category ? $product->category->category_name : 'No Category' }}</td>
+                                    <td class="border px-4 py-2">
+                                        <form action="{{ route('menu.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="submit" value="Add to Menu">
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <div class="w-1/2 p-3">
+                    <table class="table-auto w-full mb-6">
+                        <tbody>
+                            @foreach ($products as $product)
+                                @if ($product->category && $product->category->id == 2)
+                                    <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
+                                        <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                                        <td class="border px-4 py-2">{{ $product->price }}</td>
+                                        <td class="border px-4 py-2">{{ $product->category ? $product->category->category_name : 'No Category' }}</td>
+                                        <td class="border px-4 py-2">
+                                            <form action="{{ route('menu.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="submit" value="Add to Menu">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <div class="w-1/2 p-3">
+                    <table class="table-auto w-full mb-6">
+                        <tbody>
+                            @foreach ($products as $product)
+                                @if ($product->category && $product->category->id == 3)
+                                    <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
+                                        <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                                        <td class="border px-4 py-2">{{ $product->price }}</td>
+                                        <td class="border px-4 py-2">{{ $product->category ? $product->category->category_name : 'No Category' }}</td>
+                                        <td class="border px-4 py-2">
+                                            <form action="{{ route('menu.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="submit" value="Add to Menu">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <div class="w-1/2 p-3">
+                    <table class="table-auto w-full mb-6">
+                        <tbody>
+                            @foreach ($products as $product)
+                                @if ($product->category && $product->category->id == 4)
+                                    <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
+                                        <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                                        <td class="border px-4 py-2">{{ $product->price }}</td>
+                                        <td class="border px-4 py-2">{{ $product->category ? $product->category->category_name : 'No Category' }}</td>
+                                        <td class="border px-4 py-2">
+                                            <form action="{{ route('menu.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <input type="submit" value="Add to Menu">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>

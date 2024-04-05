@@ -19,16 +19,23 @@
                                 <th class="px-4 py-2">Vrijgezellenfeest</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($menus as $menu)
-                                <tr>
-                                    <td class="border px-4 py-2">{{ $menu->snackpakket1 }}</td>
-                                    <td class="border px-4 py-2">{{ $menu->snackpakket2 }}</td>
-                                    <td class="border px-4 py-2">{{ $menu->kinderpartij }}</td>
-                                    <td class="border px-4 py-2">{{ $menu->vrijgezellenfeest }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                            <tbody>
+                                @foreach ($menus as $menu)
+                                    <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
+                                        <td class="border px-4 py-2">{{ $menu->product ? $menu->product->product_name : 'No Product' }}</td>
+                                        <td class="border px-4 py-2">{{ $menu->product ? $menu->product->price : 'No Price' }}</td>
+                                        <td class="border px-4 py-2">{{ $menu->product && $menu->product->category ? $menu->product->category->category_name : 'No Category' }}</td>
+                                        <td>
+                                            <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">❌</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+                            </tbody>
                     </table>
                 </div>
             </div>

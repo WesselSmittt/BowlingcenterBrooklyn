@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -11,8 +12,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::all();
-        return view('menu.index', ['menus' => $menus]);
+        $menus = Menu::with('product.category')->get();
+
+        return view('menu.index', compact('menus'));
     }
 
     /**
@@ -20,7 +22,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu.create');
+        $products = Product::all();
+    
+        return view('menu.create', ['products' => $products]);
     }
 
     /**
@@ -28,9 +32,17 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $menu = Menu::create($request->all());
+        $product = Product::find($request->product_id);
 
-        return redirect()->route('menu.index'); 
+        $menu = new Menu;
+
+        $menu->product_id = $request->product_id;
+        $menu->category_id = $product->category_id;
+
+
+        $menu->save();
+
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -65,6 +77,9 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menu = Menu::find($id);
+        $menu->delete();
+    
+        return redirect()->route('menu.index');
     }
 }
