@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         $product = Product::create($request->all());
 
-        return redirect()->route('menu.products.index'); 
+        return redirect()->route('product.index'); 
     }
 
     public function edit(string $id)
