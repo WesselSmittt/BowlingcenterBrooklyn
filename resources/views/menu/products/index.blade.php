@@ -9,6 +9,8 @@
                 <tr>
                     <th class="px-4 py-2">Naam</th>
                     <th class="px-4 py-2">Prijs</th>
+                    <th class="px-4 py-2">Categorie</th>
+                    <th class="px-4 py-2">Acties</th>
                     <!-- Add other columns... -->
                 </tr>
             </thead>
@@ -17,6 +19,16 @@
                     <tr class="{{ $loop->iteration % 2 ? 'bg-gray-100' : '' }}">
                         <td class="border px-4 py-2">{{ $product->product_name }}</td>
                         <td class="border px-4 py-2">{{ $product->price }}</td>
+                        <td class="border px-4 py-2">{{ $product->category ? $product->category->category_name : 'No Category' }}</td>
+                        <td>
+                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
+
+                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">❌</button>
+                            </form>
+                        </td>
                         <!-- Add other columns... -->
                     </tr>
                 @endforeach
