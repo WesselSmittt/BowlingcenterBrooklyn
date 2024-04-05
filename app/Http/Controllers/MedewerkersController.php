@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reserveren;
 use Illuminate\Http\Request;
 
 class MedewerkersController extends Controller
@@ -11,7 +12,9 @@ class MedewerkersController extends Controller
      */
     public function index()
     {
-        return view('medewerkers.index');
+        $reservations = Reserveren::all();
+
+        return view('medewerkers.index', ['reservations' => $reservations]);
     }
 
     /**

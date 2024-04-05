@@ -4,6 +4,9 @@
             {{ __('Mijn reservaties') }}
         </h2>
     </x-slot>
+    <div class="p-6 bg-white border-b border-gray-200">
+        <a href="{{ route('medewerkers.index') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Go to Medewerkers</a>
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -28,20 +31,20 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($reservations as $reservation)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $reservation->start_time }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $reservation->end_time }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">👁️</a>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium ">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">❌</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $reservation->start_time }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $reservation->end_time }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">👁️</a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium ">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">❌</a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
