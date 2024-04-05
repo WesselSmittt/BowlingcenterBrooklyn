@@ -5,25 +5,18 @@ use App\Models\Reserveren;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ReserverenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('reserveren.index');
  
     } 
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-    {
-        
+    { 
 
         $reserveren = new Reserveren;
 
@@ -42,9 +35,6 @@ class ReserverenController extends Controller
     return redirect('reserveren');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $reservation = Reserveren::findOrFail($id);
@@ -54,9 +44,33 @@ class ReserverenController extends Controller
 
     public function destroy($id)
         {
-    $reservation = Reserveren::findOrFail($id);
-    $reservation->delete();
+            $reserveren = Reserveren::find($id);
+            if ($reserveren) {
+                $reserveren->delete();
+                // Voeg een succesbericht toe aan de sessie
+                Session::flash('success', 'Reservering succesvol verwijderd');
+            } else {
+                // Voeg een foutbericht toe aan de sessie
+                Session::flash('error', 'Er is een fout opgetreden bij het verwijderen van de reservering');
+            }
 
     return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
         }
+
+    public function edit($id)
+    {
+        $reserveren = Reserveren::find($id);
+        return view('reserveren.edit', compact('reserveren'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $reserveren = Reserveren::find($id);
+        $reserveren->total_childs = $request->get('total_childs');
+        $reserveren->total_adults = $request->get('total_adults');
+        // Update other fields...
+        $reserveren->save();
+
+        return redirect()->route('reserveren.show', $id)->with('success', 'Reservering succesvol bijgewerkt');
+    }
 }

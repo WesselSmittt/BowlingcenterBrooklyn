@@ -8,7 +8,20 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Succesvol verwijderd!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+            @endif
+            @if (Session::has('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+            @endif
+
+                <div class="p-6 text-gray-900 mt-4">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-orange-300">
                             <tr>
@@ -42,7 +55,7 @@
                                         <form action="{{ route('reserveren.destroy', $reservation->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-indigo-600 hover:text-indigo-900">❌</button>
+                                            <button type="submit" class="text-indigo-600 hover:text-indigo-900" onclick="return confirm('Weet je zeker dat je deze reservering wilt verwijderen?')">❌</button>
                                         </form>
                                     </td>
                                 </tr>
