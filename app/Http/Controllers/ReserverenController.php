@@ -27,7 +27,9 @@ class ReserverenController extends Controller
 
         $reserveren = new Reserveren;
 
-        $reserveren->tariff_id = $request->tariff_id;
+        $reserveren->setTariffId();
+
+        $reserveren->tariff_id = $reserveren->getTariffId();
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
         $reserveren->end_time = $request->end_time;
@@ -50,27 +52,11 @@ class ReserverenController extends Controller
         return view('reserveren.show', ['reservation' => $reservation]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function destroy($id)
+        {
+    $reservation = Reserveren::findOrFail($id);
+    $reservation->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
+        }
 }
