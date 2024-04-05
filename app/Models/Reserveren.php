@@ -42,6 +42,31 @@ class Reserveren extends Model
     }
 
 
+    public function calculatePrice()
+    {
+        // Prijzen per uur voor elk tarief
+        $tariffPrices = [
+            1 => 24, // Prijs voor tarief 1
+            2 => 28, // Prijs voor tarief 2
+            3 => 33.50, // Prijs voor tarief 3
+        ];
+
+        $startTime = strtotime($this->start_time);
+        $endTime = strtotime($this->end_time);
+
+        if ($startTime === false || $endTime === false) {
+            throw new \Exception("Fout bij het omzetten van tijden naar timestamps. Starttijd: {$this->start_time}, Eindtijd: {$this->end_time}");
+        }
+
+        $hours = ($endTime - $startTime) / 3600;
+
+        if (!isset($tariffPrices[$this->tariff_id])) {
+            throw new \Exception("Onbekend tarief ID: {$this->tariff_id}");
+        }
+
+        $this->price = $hours * $tariffPrices[$this->tariff_id];
+    }
+
      public function tariff()
     {
         return $this->belongsTo(Tariff::class);

@@ -20,17 +20,25 @@ class ReserverenController extends Controller
         $reserveren = new Reserveren;
 
         $startTime = strtotime($request->start_time);
+        $endTime = strtotime($request->end_time);
         $dayOfWeek = date("w", $startTime);
-        $hour = date("H", $startTime);
+        $hourStart = date("H", $startTime);
+        $hourEnd = date("H", $endTime);
 
+        // Controleer of het bowlingcentrum geopend is
+        if ($hourStart < 14 || ($dayOfWeek >= 1 && $dayOfWeek <= 4 && $hourEnd > 22) || ($dayOfWeek >= 5 && $hourEnd > 24)) {
+            return redirect()->back()->with('error', 'Het bowlingcentrum is gesloten op de geselecteerde tijden.');
+        }
+
+        // Stel het tarief in op basis van de dag en het uur
         if ($dayOfWeek >= 1 && $dayOfWeek <= 4) {
             // Maandag t/m donderdag
             $reserveren->tariff_id = 1;
-        } elseif ($dayOfWeek >= 5 && $hour >= 14 && $hour < 18) {
-            // Vrijdag t/m zondag van 14.00 uur tot 18.00 uur
+        } elseif ($dayOfWeek >= 5 && $hourStart >= 14 && $hourEnd <= 22) {
+            // Vrijdag t/m zondag van 14.00 uur tot 22.00 uur
             $reserveren->tariff_id = 2;
-        } elseif ($dayOfWeek >= 5 && $hour >= 18 && $hour < 24) {
-            // Vrijdag t/m zondag van 18.00 uur tot 24.00 uur
+        } elseif ($dayOfWeek >= 5 && $hourStart >= 22 && $hourEnd <= 24) {
+            // Vrijdag t/m zondag van 22.00 uur tot 24.00 uur (magic bowlen)
             $reserveren->tariff_id = 3;
         }
 
@@ -40,10 +48,10 @@ class ReserverenController extends Controller
         $reserveren->total_childs = $request->total_childs;
         $reserveren->total_adults = $request->total_adults;
         $reserveren->package = $request->package;
-
+        $reserveren->calculatePrice();
         $reserveren->save();
 
-        return redirect('reserveren');
+        return redirect('dashboard');
     }
 
     public function show($id)
