@@ -24,12 +24,10 @@ class ReserverenController extends Controller
     public function store(Request $request)
     {
         
-        
 
         $reserveren = new Reserveren;
 
-        $reserveren->price = $reserveren->calculatePrice();
-        $reserveren->tariff_id = $request->tariff_id;
+        $reserveren->tariff_id = $reserveren->getTariffId();
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
         $reserveren->end_time = $request->end_time;

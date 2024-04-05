@@ -14,32 +14,25 @@ class Reserveren extends Model
     protected $fillable = ['datum', 'tijd', 'aantal_personen', 'klant_id', 'medewerker_id', 'tariff_id', 'start_time', 'end_time'];
 
     
-    public function calculatePrice()
-{
-    $start = Carbon::parse($this->start_time);
-    $end = Carbon::parse($this->end_time);
-    $duration = $start->diffInHours($end);
+    public function getTariffId()
+    {
+        $start = Carbon::parse($this->start_time);
+        $end = Carbon::parse($this->end_time);
+        $dayOfWeek = $start->dayOfWeek;
+        $hour = $start->hour;
 
-    if ($this->tariff === null) {
-        // Handle the case when there's no related Tariff
-        return 0;
-    }
+        if ($dayOfWeek >= Carbon::MONDAY && $dayOfWeek <= Carbon::THURSDAY) {
+            return 1;
+        } elseif ($dayOfWeek >= Carbon::FRIDAY && $dayOfWeek <= Carbon::SUNDAY) {
+            if ($hour >= 14 && $hour < 18) {
+                return 2;
+            } elseif ($hour >= 18 && $hour < 24) {
+                return 3;
+            }
+        }
 
-    switch ($this->tariff_id) {
-        case 1:
-            // Monday to Thursday
-            return $this->tariff->product_price * $duration;
-        case 2:
-            // Friday to Sunday, 14:00 to 18:00
-            return $this->tariff->product_price * $duration;
-        case 3:
-            // Friday to Sunday, 18:00 to 24:00
-            return $this->tariff->product_price * $duration;
-        default:
-            // Default to the lowest price
-            return $this->tariff->product_price * $duration;
+        return null;
     }
-}
 
         public function tariff()
         {
