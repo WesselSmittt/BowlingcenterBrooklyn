@@ -51,14 +51,12 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medewerkers.index');
     Route::get('/mederwerkers/user/{id}', [MedewerkersController::class, 'userReservations'])->name('allreservations.user');
     Route::get('reservation/edit/{id}', [MedewerkersController::class, 'edit'])->name('reservation.edit');
     Route::put('medewerkers/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.update');
     Route::delete('/reservation/{id}', [MedewerkersController::class, 'destroy'])->name('reservation.destroy');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware('auth')->group(function () {
