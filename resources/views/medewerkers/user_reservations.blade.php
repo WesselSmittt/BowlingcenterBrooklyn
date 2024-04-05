@@ -1,10 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
+        <a href="{{ route('medewerkers.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Back
+        </a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-            {{ __('Medewerkers') }}
+            {{ __('Klant') }}: {{ $reservations->first()->user_name ?? '' }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -19,7 +21,7 @@
                                     Tariff ID
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                    Klant naam
+                                    User ID
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                                     Start Time
@@ -43,11 +45,7 @@
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->tariff_id }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{ route('allreservations.user', $reservation->user_id) }}" class="text-indigo-600 hover:text-indigo-900">
-                                        {{ $reservation->user_name }}
-                                    </a>
-                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->user_name }} </td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->start_time }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->end_time }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->total_childs }}</td>

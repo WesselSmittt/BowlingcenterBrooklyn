@@ -4,17 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserveren;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MedewerkersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Retrieves all the Reservations from the database and puts them in a variable and gets used in the index view.
     public function index()
     {
-        $reservations = Reserveren::all();
+        $reservations = DB::table('reservations')
+            ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->select('reservations.*', 'users.name as user_name')
+            ->get();
 
         return view('medewerkers.index', ['reservations' => $reservations]);
+    }
+
+    public function userReservations($id)
+    {
+        $reservations = DB::table('reservations')
+            ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->where('users.id', $id)
+            ->select('reservations.*', 'users.name as user_name')
+            ->get();
+
+        return view('medewerkers.user_reservations', ['reservations' => $reservations]);
     }
 
     /**

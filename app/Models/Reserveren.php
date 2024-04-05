@@ -12,5 +12,8 @@ class Reserveren extends Model
     protected $table = 'reservations';
     protected $fillable = ['datum', 'tijd', 'aantal_personen', 'klant_id', 'medewerker_id'];
 
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
