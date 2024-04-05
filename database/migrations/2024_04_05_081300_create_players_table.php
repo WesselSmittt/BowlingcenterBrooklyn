@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('game_id');
-            $table->string('player_name');
+            $table->string('name');
             $table->foreign('game_id')->references('id')->on('games');
             $table->timestamps();
         });

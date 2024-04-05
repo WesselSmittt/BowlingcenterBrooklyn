@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\ReserverenController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/games', [GameController::class, 'index'])->name('games.index');
+Route::get('/games/{id}', [GameController::class, 'show']);
+Route::get('/games/{game}', 'GameController@show')->name('games.show');
+
+Route::post('/scores', [ScoreController::class, 'store']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

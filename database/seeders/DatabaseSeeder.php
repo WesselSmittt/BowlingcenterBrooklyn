@@ -2,8 +2,13 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ScoreTableSeeder;
+use Database\Seeders\GameTableSeeder;
+use Database\Seeders\PlayerTableSeeder;
+use Database\Seeders\ReservationTableSeeder;
+use Database\Seeders\UserTableSeeder;
+use Database\Seeders\TariffTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(ScoreTableSeeder::class);
+        $this->call(GameTableSeeder::class);
+        $this->call(PlayerTableSeeder::class);
+        $this->call(ReservationTableSeeder::class);
+        $this->call(UserTableSeeder::class);
+        $this->call(TariffTableSeeder::class);
     }
 }

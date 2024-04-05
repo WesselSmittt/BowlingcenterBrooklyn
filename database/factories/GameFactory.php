@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Menu;
-use App\Models\Product;
-use App\Models\Categorie;
+use App\Models\Game;
+use App\Models\User;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MenuFactory extends Factory
+class GameFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Menu::class;
+    protected $model = Game::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +24,8 @@ class MenuFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => Product::factory(),
-            'category_id' => Categorie::factory(),
+            'user_id' => User::factory(),
+            'reservation_id' => Reservation::factory(),
         ];
     }
 }
