@@ -17,22 +17,33 @@ class ReserverenController extends Controller
 
     public function store(Request $request)
     { 
-
         $reserveren = new Reserveren;
 
-        $reserveren->setTariffId();
+        $startTime = strtotime($request->start_time);
+        $dayOfWeek = date("w", $startTime);
+        $hour = date("H", $startTime);
 
-        $reserveren->tariff_id = $reserveren->getTariffId();
+        if ($dayOfWeek >= 1 && $dayOfWeek <= 4) {
+            // Maandag t/m donderdag
+            $reserveren->tariff_id = 1;
+        } elseif ($dayOfWeek >= 5 && $hour >= 14 && $hour < 18) {
+            // Vrijdag t/m zondag van 14.00 uur tot 18.00 uur
+            $reserveren->tariff_id = 2;
+        } elseif ($dayOfWeek >= 5 && $hour >= 18 && $hour < 24) {
+            // Vrijdag t/m zondag van 18.00 uur tot 24.00 uur
+            $reserveren->tariff_id = 3;
+        }
+
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
         $reserveren->end_time = $request->end_time;
         $reserveren->total_childs = $request->total_childs;
         $reserveren->total_adults = $request->total_adults;
-        $reserveren->menu_id = $request->menu_id;
+        $reserveren->package = $request->package;
 
         $reserveren->save();
 
-    return redirect('reserveren');
+        return redirect('reserveren');
     }
 
     public function show($id)
@@ -68,7 +79,6 @@ class ReserverenController extends Controller
         $reserveren = Reserveren::find($id);
         $reserveren->total_childs = $request->get('total_childs');
         $reserveren->total_adults = $request->get('total_adults');
-        // Update other fields...
         $reserveren->save();
 
         return redirect()->route('reserveren.show', $id)->with('success', 'Reservering succesvol bijgewerkt');

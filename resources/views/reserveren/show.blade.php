@@ -39,6 +39,11 @@
                     <td class="px-4 py-2 bg-orange-200">Aantal volwassenen</td>
                     <td class="px-4 py-2 bg-pink-200">{{ $reservation->total_adults }}</td>
                 </tr>
+                <tr>
+                    <td class="px-4 py-2 bg-orange-200">Pakket</td>
+                    <td class="px-4 py-2 bg-pink-200">{{ $reservation->package }}</td>
+                </tr>
+                
             </tbody>
             </table>
         </div>

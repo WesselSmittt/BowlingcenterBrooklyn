@@ -32,6 +32,17 @@
                             <input type="number" id="total_adults" name="total_adults" class="w-full">
                         </div>
 
+                        <div>
+                            <label for="package">Pakket:</label>
+                            <select id="package" name="package" class="w-full">
+                                <option value="">Geen</option>
+                                <option value="snackpakket_basis">Snackpakket basis</option>
+                                <option value="snackpakket_luxe">Snackpakket luxe</option>
+                                <option value="kinderpartij">Kinderpartij</option>
+                                <option value="vrijgezellenfeest">Vrijgezellenfeest</option>
+                            </select>
+                        </div>
+
                         <div class="col-span-2">
                             <button type="submit" class="w-full">Verzenden</button>
                         </div>

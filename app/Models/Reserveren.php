@@ -11,7 +11,7 @@ class Reserveren extends Model
     use HasFactory;
 
     protected $table = 'reservations';
-    protected $fillable = ['datum', 'tijd', 'aantal_personen', 'klant_id', 'medewerker_id', 'tariff_id', 'start_time', 'end_time'];
+    protected $fillable = ['user_id', 'tariff_id' ,'start_time', 'end_time', 'total_childs', 'total_adults', 'menu_id', 'price'];
 
     
     public function getTariffId()
