@@ -69,7 +69,20 @@ class MedewerkersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'tariff_id' => 'required|integer',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+            'total_childs' => 'required|integer',
+            'total_adults' => 'required|integer',
+            'menu_id' => 'required|integer',
+        ]);
+
+        DB::table('reservations')
+            ->where('id', $id)
+            ->update($validatedData);
+
+        return redirect()->route('medewerkers.index')->with('success', 'Reservation updated successfully');
     }
 
     /**

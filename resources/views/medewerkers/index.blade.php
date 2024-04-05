@@ -57,7 +57,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->total_adults }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->menu_id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{ route('reservations.edit', $reservation->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <a href="{{ route('reservation.edit', $reservation->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         edit
                                     </a>
                                 </td>
