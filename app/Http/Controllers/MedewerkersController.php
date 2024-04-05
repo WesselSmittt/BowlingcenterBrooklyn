@@ -93,6 +93,7 @@ class MedewerkersController extends Controller
     {
         DB::table('reservations')->where('id', $id)->delete();
 
-        return redirect()->route('medewerkers.index')->with('success', 'Reservation deleted successfully');
+
+        return redirect()->route('medewerkers.index')->with('success_delete', 'Reservation deleted successfully');
     }
 }
