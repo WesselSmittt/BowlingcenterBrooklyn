@@ -36,4 +36,38 @@ class ScoreController extends Controller
 
         // Redirect, return a view, or do whatever you need to do after storing the score
     }
+
+    public function edit($score_id)
+{
+    // Retrieve the score by its ID
+    $score = Score::findOrFail($score_id);
+    
+    // Pass the score to the view
+    return view('scores.edit', compact('score'));
+}   
+
+    public function destroy($score_id)
+    {
+        // Retrieve the score by its ID
+        $score = Score::findOrFail($score_id);
+        
+        // Delete the score
+        $score->delete();
+
+        // You can redirect the user back to the games page or anywhere else after deletion
+        return redirect()->route('games.index')->with('success', 'Score deleted successfully');
+    }
+
+    public function update(Request $request, $score_id)
+{
+    $score = Score::findOrFail($score_id);
+    
+    // Explicitly assign fields you want to update
+    $score->score = $request->input('score');
+    // Add more fields if necessary
+    
+    $score->save();
+    
+    return redirect()->route('games.index')->with('success', 'Score updated successfully');
+}
 }

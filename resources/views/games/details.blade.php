@@ -16,26 +16,35 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> <!-- Add this header for actions -->
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach($scores as $score)
-    <tr>
-    <td class="px-6 py-4 whitespace-nowrap">
-    @if ($score->player)
-        @if ($score->player->name)
-            {{ $score->player->name }}
-        @else
-            Player associated with the game not found
-        @endif
-    @else
-        Game not found
-    @endif
-</td>
-
-        <td class="px-6 py-4 whitespace-nowrap">{{ $score->score }}</td>
-    </tr>
-@endforeach
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            @if ($score->player)
+                                @if ($score->player->name)
+                                    <a href="{{ route('player.scores', ['player_id' => $score->player->id]) }}">{{ $score->player->name }}</a>
+                                @else
+                                    Player associated with the game not found
+                                @endif
+                            @else
+                                Game not found
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $score->score }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <!-- Add buttons or links for CRUD operations -->
+                            <a href="{{ route('scores.edit', ['score_id' => $score->id]) }}" class="text-blue-500 hover:text-blue-700 mr-2">Edit</a>
+                            <form action="{{ route('scores.destroy', ['score_id' => $score->id]) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this score?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 

@@ -10,8 +10,9 @@ class Player extends Model
 {
     use HasFactory;
     
-    public function score()
+    public function scores()
     {
         return $this->belongsTo(Score::class);
+        return $this->hasMany(Score::class);
     }
 }

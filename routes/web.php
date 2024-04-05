@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\ReserverenController;
 use App\Http\Controllers\MedewerkersController;
@@ -28,11 +29,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/games', [GameController::class, 'index'])->name('games.index');
-Route::get('/games/{id}', [GameController::class, 'show']);
-Route::get('/games/{game}', 'GameController@show')->name('games.show');
-
-Route::post('/scores', [ScoreController::class, 'store']);
 
 
 Route::middleware('auth')->group(function () {
@@ -62,6 +58,17 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/scores', [ScoresController::class, 'index'])->name('scores.index');
+    Route::get('/games', [GameController::class, 'index'])->name('games.index');
+    Route::get('/games/{id}', [GameController::class, 'show']);
+    Route::get('/games/{game}', 'GameController@show')->name('games.show');
+    
+    Route::post('/scores', [ScoreController::class, 'store']);
+    
+    Route::get('/players/{player_id}/scores', [PlayerController::class, 'scores'])->name('player.scores');
+
+    Route::get('/scores/{score_id}/edit', [ScoreController::class, 'edit'])->name('scores.edit');
+    Route::delete('/scores/{score_id}', [ScoreController::class, 'destroy'])->name('scores.destroy');
+    Route::patch('/scores/{score_id}', [ScoreController::class, 'update'])->name('scores.update');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
