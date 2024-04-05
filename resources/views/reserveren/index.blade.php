@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
             {{ __('Reserveren') }}
         </h2>
     </x-slot>
@@ -9,7 +9,33 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                   
+                    <form method="POST" action="{{ route('reserveren.store') }}" class="grid grid-cols-2 gap-4">
+                        @csrf
+
+                        <div>
+                            <label for="start_time">Begin tijd:</label>
+                            <input type="datetime-local" id="start_time" name="start_time" class="w-full">
+                        </div>
+
+                        <div>
+                            <label for="end_time">Eind tijd:</label>
+                            <input type="datetime-local" id="end_time" name="end_time" class="w-full">
+                        </div>
+
+                        <div>
+                            <label for="total_childs">Totaal aantal kinderen:</label>
+                            <input type="number" id="total_childs" name="total_childs" class="w-full">
+                        </div>
+
+                        <div>
+                            <label for="total_adults">Totaal aantal volwassenen:</label>
+                            <input type="number" id="total_adults" name="total_adults" class="w-full">
+                        </div>
+
+                        <div class="col-span-2">
+                            <button type="submit" class="w-full">Verzenden</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
