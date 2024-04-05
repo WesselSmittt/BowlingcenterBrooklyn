@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Reserveren;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,7 @@ class ReserverenController extends Controller
     public function index()
     {
         return view('reserveren.index');
- 
-    } 
+    }
 
 
     /**
@@ -23,7 +23,7 @@ class ReserverenController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 
         $reserveren = new Reserveren;
 
@@ -39,7 +39,7 @@ class ReserverenController extends Controller
 
         $reserveren->save();
 
-    return redirect('reserveren');
+        return redirect('reserveren');
     }
 
     /**
@@ -53,10 +53,10 @@ class ReserverenController extends Controller
     }
 
     public function destroy($id)
-        {
-    $reservation = Reserveren::findOrFail($id);
-    $reservation->delete();
+    {
+        $reservation = Reserveren::findOrFail($id);
+        $reservation->delete();
 
-    return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
-        }
+        return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
+    }
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('total_childs');
             $table->integer('total_adults');
             $table->unsignedBigInteger('menu_id')->nullable();
-            $table->decimal('price', 8, 2)->nullable(); 
             $table->foreign('tariff_id')->references('id')->on('tariffs');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('menu_id')->references('id')->on('menu');
