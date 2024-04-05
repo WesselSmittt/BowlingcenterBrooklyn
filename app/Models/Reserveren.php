@@ -34,8 +34,21 @@ class Reserveren extends Model
         return null;
     }
 
-        public function tariff()
-        {
-            return $this->belongsTo(Tariff::class);
-        }
+    
+    public function setTariffId()
+    {
+        $this->tariff_id = $this->getTariffId();
+        $this->save();
+    }
+
+
+     public function tariff()
+    {
+        return $this->belongsTo(Tariff::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

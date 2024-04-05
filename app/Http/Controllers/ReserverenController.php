@@ -27,6 +27,8 @@ class ReserverenController extends Controller
 
         $reserveren = new Reserveren;
 
+        $reserveren->setTariffId();
+
         $reserveren->tariff_id = $reserveren->getTariffId();
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
