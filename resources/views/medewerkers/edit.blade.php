@@ -21,13 +21,13 @@
                         </div>
 
                         <div class="space-y-2">
-                            <label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
-                            <input id="start_time" type="time" name="start_time" value="{{ $reservation->start_time }}" required class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <label for="start_time" class="block text-sm font-medium text-gray-700">Begin tijd:</label>
+                            <input id="start_time" type="datetime-local" name="start_time" value="{{ date('Y-m-d\TH:i', strtotime($reservation->start_time)) }}" required class="block w-full px-3 py-2 border border-gray-300 rounded-md">
                         </div>
 
                         <div class="space-y-2">
-                            <label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
-                            <input id="end_time" type="time" name="end_time" value="{{ $reservation->end_time }}" required class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <label for="end_time" class="block text-sm font-medium text-gray-700">Eind tijd:</label>
+                            <input id="end_time" type="datetime-local" name="end_time" value="{{ date('Y-m-d\TH:i', strtotime($reservation->end_time)) }}" required class="block w-full px-3 py-2 border border-gray-300 rounded-md">
                         </div>
 
                         <div class="space-y-2">

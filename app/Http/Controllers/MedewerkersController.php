@@ -71,11 +71,12 @@ class MedewerkersController extends Controller
     {
         $validatedData = $request->validate([
             'tariff_id' => 'required|integer',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'start_time' => 'required|date_format:Y-m-d\TH:i',
+            'end_time' => 'required|date_format:Y-m-d\TH:i',
             'total_childs' => 'required|integer',
             'total_adults' => 'required|integer',
             'menu_id' => 'required|integer',
+            'user_id' => 'required|integer',
         ]);
 
         DB::table('reservations')
