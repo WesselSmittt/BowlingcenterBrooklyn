@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tariff_id');
+            $table->unsignedBigInteger('tariff_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->integer('total_childs');
             $table->integer('total_adults');
-            $table->unsignedBigInteger('menu_id');
+            $table->unsignedBigInteger('menu_id')->nullable();
             $table->foreign('tariff_id')->references('id')->on('tariffs');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('menu_id')->references('id')->on('menu');
