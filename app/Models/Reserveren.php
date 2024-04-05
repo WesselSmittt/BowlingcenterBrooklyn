@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\Tariff;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ class Reserveren extends Model
     protected $table = 'reservations';
     protected $fillable = ['datum', 'tijd', 'aantal_personen', 'klant_id', 'medewerker_id', 'tariff_id', 'start_time', 'end_time'];
 
-    
+
     public function getTariffId()
     {
         $start = Carbon::parse($this->start_time);
@@ -34,7 +35,7 @@ class Reserveren extends Model
         return null;
     }
 
-    
+
     public function setTariffId()
     {
         $this->tariff_id = $this->getTariffId();
@@ -42,17 +43,10 @@ class Reserveren extends Model
     }
 
 
-     public function tariff()
+    public function tariff()
     {
         return $this->belongsTo(Tariff::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-}
-    protected $fillable = ['datum', 'tijd', 'aantal_personen', 'klant_id', 'medewerker_id'];
 
     public function user()
     {
