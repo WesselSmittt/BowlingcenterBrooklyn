@@ -18,7 +18,7 @@ class MedewerkersController extends Controller
 
         return view('medewerkers.index', ['reservations' => $reservations]);
     }
-
+    // Retrieves all the Reservations for a specific user from the database, joins them with the users table, and sends them to the user_reservations view.
     public function userReservations($id)
     {
         $reservations = DB::table('reservations')
@@ -45,28 +45,14 @@ class MedewerkersController extends Controller
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Retrieves a specific reservation from the database and sends it to the edit view.
     public function edit(string $id)
     {
         $reservation = DB::table('reservations')->where('id', $id)->first();
 
         return view('medewerkers.edit', ['reservation' => $reservation]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    // Validates the request data and updates a specific reservation in the database, then redirects to the index view with a success message.
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
@@ -85,10 +71,7 @@ class MedewerkersController extends Controller
 
         return redirect()->route('medewerkers.index')->with('success', 'Reservation updated successfully');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Deletes a specific reservation from the database, then redirects to the index view with a success message.
     public function destroy(string $id)
     {
         DB::table('reservations')->where('id', $id)->delete();
