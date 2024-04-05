@@ -80,18 +80,29 @@ class MedewerkersController extends Controller
 
         return redirect()->route('medewerkers.index')->with('success_delete', 'Reservation deleted successfully');
     }
+    // This function is used to display all users
     public function show()
     {
+        // Fetch all users from the database
         $users = User::all();
+
+        // Return the 'make-medewerker' view with the users data
         return view('medewerkers.make-medewerker', compact('users'));
     }
 
+    // This function is used to change a user's role to 'medewerker'
     public function makeMedewerker($id)
     {
+        // Find the user with the given id, or fail if not found
         $user = User::findOrFail($id);
+
+        // Change the user's role_id to 2 (which represents 'medewerker')
         $user->role_id = 2;
+
+        // Save the changes to the database
         $user->save();
 
+        // Redirect the user back to the 'users.show' route
         return redirect()->route('users.show');
     }
 }
