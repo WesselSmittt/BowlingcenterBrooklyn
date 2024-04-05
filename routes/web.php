@@ -5,6 +5,7 @@ use App\Http\Controllers\ReserverenController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/menu', [App\Http\Controllers\MenuController::class, 'store'])->name('menu.store');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('product.store');  
+    
 });
 
 Route::middleware('auth')->group(function () {
