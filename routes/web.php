@@ -57,6 +57,8 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::get('reservation/edit/{id}', [MedewerkersController::class, 'edit'])->name('reservation.edit');
     Route::put('medewerkers/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.update');
     Route::delete('/reservation/{id}', [MedewerkersController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/users', [MedewerkersController::class, 'show'])->name('users.show');
+    Route::post('/users/{id}/make-medewerker', [MedewerkersController::class, 'makeMedewerker'])->name('users.make-medewerker');
 });
 
 Route::middleware('auth')->group(function () {

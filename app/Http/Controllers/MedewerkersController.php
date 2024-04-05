@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Reserveren;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,5 +79,19 @@ class MedewerkersController extends Controller
 
 
         return redirect()->route('medewerkers.index')->with('success_delete', 'Reservation deleted successfully');
+    }
+    public function show()
+    {
+        $users = User::all();
+        return view('medewerkers.make-medewerker', compact('users'));
+    }
+
+    public function makeMedewerker($id)
+    {
+        $user = User::findOrFail($id);
+        $user->role_id = 2;
+        $user->save();
+
+        return redirect()->route('users.show');
     }
 }

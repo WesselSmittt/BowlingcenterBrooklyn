@@ -38,6 +38,13 @@
                     </x-nav-link>
                     @endif
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if(Auth::check() && Auth::user()->role_id == 2)
+                    <x-nav-link :href="route('users.show')" :active="request()->routeIs('users.show')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+                    @endif
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
