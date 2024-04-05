@@ -14,46 +14,44 @@
                 </div>
             @endif
              <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('reserveren.store') }}" class="grid grid-cols-2 gap-4">
-                        @csrf
+            <div class="p-6 text-gray-900">
+                <form method="POST" action="{{ route('reserveren.store') }}" class="space-y-8">
+                    @csrf
 
-                        <div>
-                            <label for="start_time">Begin tijd:</label>
-                            <input type="datetime-local" id="start_time" name="start_time" class="w-full">
-                        </div>
+                    <div class="space-y-2">
+                        <label for="start_time" class="block text-sm font-medium text-gray-700">Begin tijd:</label>
+                        <input type="datetime-local" id="start_time" name="start_time" class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
 
-                        <div>
-                            <label for="end_time">Eind tijd:</label>
-                            <input type="datetime-local" id="end_time" name="end_time" class="w-full">
-                        </div>
+                    <div class="space-y-2">
+                        <label for="end_time" class="block text-sm font-medium text-gray-700">Eind tijd:</label>
+                        <input type="datetime-local" id="end_time" name="end_time" class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
 
-                        <div>
-                            <label for="total_childs">Totaal aantal kinderen:</label>
-                            <input type="number" id="total_childs" name="total_childs" class="w-full">
-                        </div>
+                    <div class="space-y-2">
+                        <label for="total_childs" class="block text-sm font-medium text-gray-700">Totaal aantal kinderen:</label>
+                        <input type="number" id="total_childs" name="total_childs" class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
 
-                        <div>
-                            <label for="total_adults">Totaal aantal volwassenen:</label>
-                            <input type="number" id="total_adults" name="total_adults" class="w-full">
-                        </div>
+                    <div class="space-y-2">
+                        <label for="total_adults" class="block text-sm font-medium text-gray-700">Totaal aantal volwassenen:</label>
+                        <input type="number" id="total_adults" name="total_adults" class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
 
-                        <div>
-                            <label for="package">Pakket:</label>
-                            <select id="package" name="package" class="w-full">
-                                <option value="">Geen</option>
-                                <option value="snackpakket_basis">Snackpakket basis</option>
-                                <option value="snackpakket_luxe">Snackpakket luxe</option>
-                                <option value="kinderpartij">Kinderpartij</option>
-                                <option value="vrijgezellenfeest">Vrijgezellenfeest</option>
-                            </select>
-                        </div>
+                    <div class="space-y-2">
+                        <label for="package" class="block text-sm font-medium text-gray-700">Pakket:</label>
+                        <select id="package" name="package" class="block w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <!-- Voeg hier uw opties toe -->
+                        </select>
+                    </div>
 
-                        <div class="col-span-2">
-                            <button type="submit" class="w-full">Verzenden</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="justify-center flex">
+                        <button type="submit" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
             </div>
         </div>
     </div>

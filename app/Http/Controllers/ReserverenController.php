@@ -41,6 +41,7 @@ class ReserverenController extends Controller
             // Vrijdag t/m zondag van 22.00 uur tot 24.00 uur (magic bowlen)
             $reserveren->tariff_id = 3;
         }
+        
 
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
@@ -85,8 +86,12 @@ class ReserverenController extends Controller
     public function update(Request $request, $id)
     {
         $reserveren = Reserveren::find($id);
+        $reserveren->start_time = $request->get('start_time');
+        $reserveren->end_time = $request->get('end_time');
         $reserveren->total_childs = $request->get('total_childs');
         $reserveren->total_adults = $request->get('total_adults');
+        $reserveren->package = $request->get('package');
+        $reserveren->calculatePrice();
         $reserveren->save();
 
         return redirect()->route('reserveren.show', $id)->with('success', 'Reservering succesvol bijgewerkt');

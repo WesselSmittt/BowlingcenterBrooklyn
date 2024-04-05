@@ -8,9 +8,9 @@
     <div class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ url()->previous() }}" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">
-                Ga Terug
-            </a>
+        <a href="{{ route('dashboard') }}" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">
+            Ga Terug
+        </a>
 
             <div class="overflow-x-auto ">
     <table class="table-auto w-full border-collapse border border-gray-200 mt-4 rounded-lg">
@@ -43,6 +43,9 @@
                     <td class="px-4 py-2 bg-orange-200">Pakket</td>
                     <td class="px-4 py-2 bg-pink-200">{{ $reservation->package }}</td>
                 </tr>
+                <tr>
+                    <td class="px-4 py-2 bg-orange-200">Prijs</td>
+                    <td class="px-4 py-2 bg-pink-200">{{ $reservation->price }}</td>
                 
             </tbody>
             </table>

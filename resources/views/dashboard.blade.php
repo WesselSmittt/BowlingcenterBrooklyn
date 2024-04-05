@@ -21,7 +21,7 @@
             </div>
             @endif
 
-                <div class="p-6 text-gray-900 mt-4">
+                <div class="p-6 text-gray-900">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-orange-300">
                             <tr>
