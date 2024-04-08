@@ -72,7 +72,14 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+Route::middleware('auth')->group(function () {
+    Route::get('/uitslagen', [App\Http\Controllers\UitslagenController::class, 'index'])->name('uitslagen.index'); 
+    Route::get('/uitslagen/profile/{id}', [App\Http\Controllers\UitslagenController::class, 'profile'])->name('uitslagen.profile');
+    Route::get('/persoon', [App\Http\Controllers\PersoonController::class, 'index'])->name('persoon.index');    
+    Route::get('/spellen', [App\Http\Controllers\SpelController::class, 'index'])->name('Spel.index');  
+    Route::get('/reservering', [App\Http\Controllers\ReserveringController::class, 'index'])->name('reservering.index');    
+    Route::get('/uitslagen', [App\Http\Controllers\UitslagenController::class, 'index'])->name('uitslagen.index');
+});
 
 
 
