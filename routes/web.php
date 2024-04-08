@@ -30,6 +30,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/medewerker', [App\Http\Controllers\MedewerkerController::class, 'index'])->name('medewerker.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ReserveringenController::class, 'show'])->name('dashboard');
     Route::get('/reservations/{id}/edit', [ReserveringenController::class, 'edit'])->name('reservations.edit');
