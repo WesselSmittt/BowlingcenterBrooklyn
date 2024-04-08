@@ -49,6 +49,11 @@
                             <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs" style="width: 50px;">Filter</button>
                             <a href="{{ route('medewerker.index') }}" class="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs" style="width: 50px;">Clear</a>
                         </form>
+                        @if ($message)
+                        <h2 class="text-center text-red-500">
+                            {{ $message }}
+                        </h2>
+                        @endif
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($reservations as $reservation)
                             <tr>
@@ -75,10 +80,11 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $reservation->reserveringStatus->naam }}
-                                </td>
                             </tr>
                             @endforeach
+
                         </tbody>
+
                     </table>
                 </div>
             </div>
