@@ -58,6 +58,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/reserveren', [ReserverenController::class, 'index'])->name('reserveren.index');
+    Route::post('/reserveren', [ReserverenController::class, 'store'])->name('reserveren.store');
+    Route::get('/reserveren/{id}', [ReserverenController::class, 'show'])->name('reserveren.show');
+    Route::delete('/reserveren/{id}', [ReserverenController::class, 'destroy'])->name('reserveren.destroy');
+    Route::get('/reserveren/{id}/edit', [ReserverenController::class, 'edit'])->name('reserveren.edit');
+    Route::put('/reserveren/{id}', [ReserverenController::class, 'update'])->name('reserveren.update');
+
+});
+
+Route::middleware('auth')->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

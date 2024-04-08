@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::table('reservations', function (Blueprint $table) {
-        $table->decimal('price', 8, 2)->nullable();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('pakket_opties', function (Blueprint $table) {
+            $table->id();
+            $table->string('naam');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('reservations', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };
