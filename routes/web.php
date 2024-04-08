@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReserverenController;
-use App\Http\Controllers\MedewerkersController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ScoresController;
-use App\Http\Controllers\DashboardController;
 use App\Models\Medewerkers;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReserverenController;
+use App\Http\Controllers\MedewerkersController;
+use App\Http\Controllers\ReserveringenController;
 
 
 /*
@@ -30,7 +31,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [ReserveringenController::class, 'show'])->name('dashboard');
+    Route::get('/reservations/{id}/edit', [ReserveringenController::class, 'edit'])->name('reservations.edit');
+    Route::put('/reservations/{id}', [ReserveringenController::class, 'update'])->name('reservations.update');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
