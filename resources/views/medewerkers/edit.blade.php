@@ -32,11 +32,12 @@
                             </select>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                        <button type="submit" class="ml-4">
+                        <div class="flex justify-center mt-4">
+                        <button type="submit" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-10 rounded">
                             {{ __('Wijzigen') }}
                         </button>
                         </div>
+                        
                     </form>
                 </div>
             </div>
