@@ -14,7 +14,7 @@ class Reservering extends Model
         'persoon_id',
         'reservering_status_id',
         'pakket_optie_id',
-        'aantal_personen',
+        'aantal_kinderen',
         'aankomst_datum',
         'vertrek_datum',
         'aankomst_tijd',

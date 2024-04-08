@@ -75,18 +75,21 @@ class MedewerkersController extends Controller
      * Update the specified resource in storage.
      */
 
-
-
-    public function update(Request $request, $id)
-    {
-        $reservering = Reservering::find($id);
-        $reservering->pakket_optie_id = $request->input('optiepakket_id');
-        $reservering->save();
-
-        return redirect()->route('medewerkers.index')->with('success', 'Reservering succesvol bijgewerkt');
-    }
-
-
+     public function update(Request $request, $id)
+     {
+         $reservering = Reservering::find($id);
+         $pakket_optie = PakketOptie::find($request->input('optiepakket_id'));
+     
+         // Controleer of het pakket_optie_id "4" is en er kinderen in de reservering zijn
+         if ($reservering->aantal_kinderen > 0 && $pakket_optie->id == 4) {
+             return redirect()->back()->with('error', 'Het optiepakket ' . $pakket_optie->naam . ' is niet bedoeld voor kinderen');
+         }
+     
+         $reservering->pakket_optie_id = $pakket_optie->id;
+         $reservering->save();
+     
+         return redirect()->route('medewerkers.index')->with('success', 'Reservering succesvol bijgewerkt');
+     }
 
     /**
      * Remove the specified resource from storage.

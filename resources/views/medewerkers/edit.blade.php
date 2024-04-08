@@ -7,6 +7,14 @@
 
     <div class="py-12">
         <div class="max-w-10xl mx-auto sm:px-6 lg:px-8">
+        @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">
+                    <span class="block sm:inline">{{ session('error') }}</span></strong>
+                </div>
+            @endif
+
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form method="POST" action="{{ route('reserveringen.update', $reservering) }}">
