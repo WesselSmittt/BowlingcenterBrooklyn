@@ -11,16 +11,8 @@ class Reservering extends Model
     protected $table = 'reserveringen';
 
     protected $fillable = [
-        'persoon_id',
-        'reservering_status_id',
         'pakket_optie_id',
-        'aantal_kinderen',
-        'aankomst_datum',
-        'vertrek_datum',
-        'aankomst_tijd',
-        'vertrek_tijd',
-        'prijs',
-        'opmerking',
+      
     ];
 
     public function persoon()
