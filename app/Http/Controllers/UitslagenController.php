@@ -34,7 +34,30 @@ class UitslagenController extends Controller
 
         return view('uitslagen.index', ['uitslagen' => $uitslagen]);
     }
+
+    public function edit($id)
+    {
+        $uitslag = Uitslagen::find($id);
+
+        if (!$uitslag) {
+            return redirect()->route('uitslagen.index')->with('error', 'Uitslag niet gevonden');
+        }
+
+        return view('uitslagen.edit', compact('uitslag'));
+    }
     
+    public function update(Request $request, $id)
+    {
+        $uitslag = Uitslagen::find($id);
+        $uitslag->AantalPunten = $request->AantalPunten;
+        $uitslag->save();
+
+        session()->flash('message', 'Aantal punten is gewijzigd');
+
+
+        return redirect()->route('uitslagen.index');
+    }
+
     public function profile($id)
     {
         $persoon = Persoon::find($id);

@@ -19,6 +19,11 @@
                                 <th class="px-4 py-2">Datum</th>  
                             </tr>
                         </thead>
+                            @if (session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
                         <tbody>
                         @foreach ($uitslagen as $uitslag)
                             <tr>
@@ -27,12 +32,17 @@
                                     <a href="{{ route('uitslagen.profile', $uitslag->spel->persoon->id) }}">
                                     {{ $uitslag->spel->persoon->Voornaam }}
                                     </a>
-                                </td>                                    <td class="border px-4 py-2">{{ $uitslag->spel->persoon->Tussenvoegsel }}</td>
+                                </td>                                    
+                                    <td class="border px-4 py-2">{{ $uitslag->spel->persoon->Tussenvoegsel }}</td>
                                     <td class="border px-4 py-2">{{ $uitslag->spel->persoon->Achternaam }}</td>
+                                    <td class="border px-4 py-2">
+                                        {{ $uitslag->AantalPunten }}
+                                        <a href="{{ route('uitslagen.edit', $uitslag->id) }}" class="btn btn-primary">Bewerken</a>
+                                    </td>
+                                 
                                 @else
                                     <td class="border px-4 py-2" colspan="3">Geen persoon gekoppeld</td>
                                 @endif
-                                    <td class="border px-4 py-2">{{ $uitslag->AantalPunten }}</td>
                                 @if ($uitslag->spel && $uitslag->spel->reservering)
                                     <td class="border px-4 py-2">{{ $uitslag->spel->reservering->Datum }}</td>
                                 @else

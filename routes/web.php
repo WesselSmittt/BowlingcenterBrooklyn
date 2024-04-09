@@ -80,6 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/reservering', [App\Http\Controllers\ReserveringController::class, 'index'])->name('reservering.index');    
     Route::get('/uitslagen', [App\Http\Controllers\UitslagenController::class, 'index'])->name('uitslagen.index');
     Route::get('/persoon/{id}', [App\Http\Controllers\PersoonController::class, 'show'])->name('persoon.show');
+    Route::get('/uitslagen/edit/{id}', [App\Http\Controllers\UitslagenController::class, 'edit'])->name('uitslagen.edit');
+    Route::put('/uitslagen/{id}', [App\Http\Controllers\UitslagenController::class, 'update'])->name('uitslagen.update');
+
 });
 
 
