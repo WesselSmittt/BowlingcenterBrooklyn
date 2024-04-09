@@ -48,4 +48,5 @@ class UitslagenController extends Controller
         return view('uitslagen.profile', ['uitslagen' => $uitslagen]);
     }
     
+    
 }

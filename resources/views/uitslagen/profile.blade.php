@@ -46,7 +46,7 @@
             <form method="GET" action="{{ route('uitslagen.index') }}">
                 <label for="date">Kies een datum:</label>
                 <input type="date" id="date" name="date">
-                <input type="hidden" id="persoon_id" name="persoon_id" value="{{ $persoon->id }}">
+                <input type="hidden" id="persoon_id" name="persoon_id" value="{{ $persoon->id }}"> 
                 <button type="submit" class="btn btn-primary">Tonen</button>
             </form>
         </div>
