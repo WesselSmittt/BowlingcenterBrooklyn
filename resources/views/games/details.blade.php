@@ -42,6 +42,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
                             </form>
+                            <a href="{{ route('scores.create') }}">Create Score</a>
                         </td>
                     </tr>
                 @endforeach

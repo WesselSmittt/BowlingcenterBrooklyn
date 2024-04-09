@@ -9,10 +9,13 @@ class Game extends Model
 {
     use HasFactory;
 
+//     public function player()
+// {
     
-    
-    public function player()
+//     return $this->belongsToMany(Player::class);
+// }
+public function players()
 {
-    return $this->belongsTo(Player::class);
+    return $this->belongsToMany(Player::class);
 }
 }
