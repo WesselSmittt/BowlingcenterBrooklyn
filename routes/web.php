@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/spellen', [App\Http\Controllers\SpelController::class, 'index'])->name('Spel.index');  
     Route::get('/reservering', [App\Http\Controllers\ReserveringController::class, 'index'])->name('reservering.index');    
     Route::get('/uitslagen', [App\Http\Controllers\UitslagenController::class, 'index'])->name('uitslagen.index');
+    Route::get('/persoon/{id}', [App\Http\Controllers\PersoonController::class, 'show'])->name('persoon.show');
 });
 
 

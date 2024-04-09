@@ -13,8 +13,9 @@ class UitslagenController extends Controller
     
     public function index(Request $request)
     {
+        $date = $request->input('date');
         $uitslagen = Uitslagen::with('spel', 'spel.persoon', 'spel.reservering', 'spel.reservering.persoon')
-            ->when($request->date, function ($query, $date) {
+            ->when($date, function ($query, $date) {
                 return $query->whereHas('spel.reservering', function ($query) use ($date) {
                     $query->whereDate('datum', $date);
                 });
@@ -27,10 +28,12 @@ class UitslagenController extends Controller
             ->orderBy('AantalPunten', 'desc')
             ->get();
 
+        if($uitslagen->isEmpty()){
+            return back()->with('error', 'Er is geen uitslag beschikbaar voor deze geselecteerde datum.');
+        }
+
         return view('uitslagen.index', ['uitslagen' => $uitslagen]);
     }
-    
-
     
     public function profile($id)
     {
