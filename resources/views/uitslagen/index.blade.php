@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Overzicht Uitslagen') }}
+            {{ __('Overzicht Spelers') }}
         </h2>
     </x-slot>
 
@@ -37,7 +37,7 @@
                                     <td class="border px-4 py-2">{{ $uitslag->spel->persoon->Achternaam }}</td>
                                     <td class="border px-4 py-2">
                                         {{ $uitslag->AantalPunten }}
-                                        <a href="{{ route('uitslagen.edit', $uitslag->id) }}" class="btn btn-primary">Bewerken</a>
+                                        <a href="{{ route('uitslagen.edit', $uitslag->id) }}" class="btn btn-primary text-blue-500 hover:text-blue-300">Bewerken</a>
                                     </td>
                                  
                                 @else

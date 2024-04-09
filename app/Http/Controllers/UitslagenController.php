@@ -48,6 +48,12 @@ class UitslagenController extends Controller
     
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'AantalPunten' => 'required|integer|max:300',
+        ], [
+            'AantalPunten.max' => 'Het aantal punten is niet geldig, voer een waarde in kleiner of gelijk aan 300',
+        ]);
+
         $uitslag = Uitslagen::find($id);
         $uitslag->AantalPunten = $request->AantalPunten;
         $uitslag->save();
