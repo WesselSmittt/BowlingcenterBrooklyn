@@ -8,9 +8,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    @if ($errors->any())
-                    <div class="text-center text-red-500 text-2xl">
-                        {!! implode('', $errors->all('<div>:message</div>')) !!}
+                    @if (session('error'))
+                    <div class="alert alert-danger bg-red-600">
+                        {{ session('error') }}
                     </div>
                     @endif
                     <form method="POST" action="{{ route('reservations.update', $reservation->id) }}">

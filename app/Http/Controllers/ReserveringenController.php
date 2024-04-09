@@ -34,22 +34,13 @@ class ReserveringenController extends Controller
     public function update(Request $request, $id)
     {
         $reservation = Reserveringen::findOrFail($id);
+        $pakketOptie = PakketOptie::find($request->input('pakket_optie_id'));
 
-        $request->validate([
-            'pakket_optie_id' => [
-                'required',
-                'exists:pakket_optie,id',
-                function ($attribute, $value, $fail) use ($reservation) {
-                    $pakketOptie = PakketOptie::find($value);
+        if ($reservation->aantal_kinderen > 0 && $pakketOptie->id == 4) {
+            return redirect()->back()->with('error', 'Het optiepakket ' . $pakketOptie->naam . ' is niet bedoeld voor kinderen');
+        }
 
-                    if ($pakketOptie && $reservation->aantal_kinderen > 0 && $pakketOptie->naam == 'vrijgezelenfeest') {
-                        $fail('Vrijgezelenfeest kan niet met kinderen');
-                    }
-                },
-            ],
-        ]);
-
-        $reservation->pakket_optie_id = $request->pakket_optie_id;
+        $reservation->pakket_optie_id = $pakketOptie->id;
         $reservation->save();
 
         return redirect()->route('dashboard')->with('success', 'Pakket succesvol bijgewerkt');
