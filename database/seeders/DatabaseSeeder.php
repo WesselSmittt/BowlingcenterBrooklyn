@@ -27,6 +27,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PlayerTableSeeder::class);
         $this->call(ReservationTableSeeder::class);
         $this->call(UserTableSeeder::class);
-        $this->call(TariffTableSeeder::class);
     }
 }
