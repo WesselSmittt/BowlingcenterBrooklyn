@@ -13,6 +13,8 @@
                             <input type="date" name="vanaf_datum" value="{{ request('vanaf_datum') }}">
                             <button type="submit">Tonen</button>
                         </form>
+                        <a href="{{ route('medewerkers.index') }}" class="ml-4 px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-xl">Clear</a>
+
                     </div>
                     @if (session('message'))
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
