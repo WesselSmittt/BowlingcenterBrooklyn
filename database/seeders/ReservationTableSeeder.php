@@ -14,6 +14,6 @@ class ReservationTableSeeder extends Seeder
      */
     public function run()
     {
-        Reservation::factory()->count(25)->create();
+        // Reservation::factory()->count(25)->create();
     }
 }

@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Persoon::class);
         $this->call(Reserveringstatus::class);
         $this->call(Reservering::class);
-
         $this->call(ScoreTableSeeder::class);
         $this->call(GameTableSeeder::class);
         $this->call(PlayerTableSeeder::class);

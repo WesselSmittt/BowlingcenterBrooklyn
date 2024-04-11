@@ -13,4 +13,5 @@ class Tariff extends Model
     {
         return $this->hasMany(Reserveren::class);
     }
+    
 }

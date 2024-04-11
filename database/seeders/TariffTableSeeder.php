@@ -14,6 +14,6 @@ class TariffTableSeeder extends Seeder
      */
     public function run()
     {
-        Tariff::factory()->count(25)->create();
+        // Tariff::factory()->count(25)->create();
     }
 }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2)->nullable(); 
             $table->foreign('tariff_id')->references('id')->on('tariffs');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('menu_id')->references('id')->on('menu');
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->timestamps();
         });
     }

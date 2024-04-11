@@ -14,11 +14,13 @@ class CreatePersonenTable extends Migration
         Schema::create('personen', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('type_persoon_id');
+            $table->integer('typePersoonId');
             $table->string('voornaam');
             $table->string('tussenvoegsel')->nullable();
             $table->string('achternaam');
             $table->string('roepnaam');
             $table->boolean('is_volwassen');
+            $table->boolean('isVolwassen');
             $table->timestamps();
         });
     }

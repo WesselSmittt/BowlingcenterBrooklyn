@@ -14,6 +14,6 @@ class PlayerTableSeeder extends Seeder
      */
     public function run()
     {
-        Player::factory()->count(25)->create();
+        // Player::factory()->count(25)->create();
     }
 }
