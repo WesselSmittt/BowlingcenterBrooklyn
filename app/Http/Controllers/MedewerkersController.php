@@ -59,8 +59,9 @@ class MedewerkersController extends Controller
     // Retrieves a specific reservation from the database and sends it to the edit view.
 
 
-    public function editMedewerker($id)
+    public function editMedewerker($id, $request)
     {
+
         try {
             $validatedData = $request->validate([
                 'tariff_id' => 'required|integer',
