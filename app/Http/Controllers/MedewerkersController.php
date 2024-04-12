@@ -17,29 +17,29 @@ class MedewerkersController extends Controller
 
     public function index()
     {
-        $reservations = DB::table('reservations')
+        $allReservations = DB::table('reservations')
             ->join('users', 'reservations.user_id', '=', 'users.id')
             ->select('reservations.*', 'users.name as user_name')
             ->get();
 
-        return view('medewerkers.index', ['reservations' => $reservations]);
+        return view('medewerkers.index', ['allReservations' => $allReservations]);
     }
-    // Retrieves all the Reservations for a specific user from the database, joins them with the users table, and sends them to the user_reservations view.
+
     public function userReservations($id)
     {
         try {
-            $reservations = DB::table('reservations')
+            $userReservations = DB::table('reservations')
                 ->join('users', 'reservations.user_id', '=', 'users.id')
                 ->where('users.id', $id)
                 ->select('reservations.*', 'users.name as user_name')
                 ->get();
 
-            return view('medewerkers.user_reservations', ['reservations' => $reservations]);
+            return view('medewerkers.user_reservations', ['reservations' => $userReservations]);
         } catch (\Exception $e) {
-            // If an exception is caught, redirect back with an error message
             return redirect()->back()->with('error', 'Er is een technisch probleem opgetreden en de reserveringen kunnen momenteel niet worden geladen.');
         }
     }
+
 
     /**
      * Show the form for creating a new resource.

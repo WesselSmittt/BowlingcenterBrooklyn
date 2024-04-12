@@ -57,7 +57,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($reservations as $reservation)
+                            @foreach($allReservations as $reservation)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->tariff_id }}</td>
