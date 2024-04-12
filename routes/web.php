@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\ScoreController;
-use App\Http\Controllers\ReserverenController;
-use App\Http\Controllers\MedewerkersController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ScoresController;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\DashboardController;
 use App\Models\Medewerkers;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReserverenController;
+use App\Http\Controllers\MedewerkersController;
+use App\Http\Controllers\WesselMedewerkersController;
 
 
 /*
@@ -48,12 +49,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/reserveren', [ReserverenController::class, 'index'])->name('reserveren.index');
-    Route::post('/reserveren', [ReserverenController::class, 'store'])->name('reserveren.store');
-    Route::get('/reserveren/{id}', [ReserverenController::class, 'show'])->name('reserveren.show');
-    Route::delete('/reserveren/{id}', [ReserverenController::class, 'destroy'])->name('reserveren.destroy');
-    Route::get('/reserveren/{id}/edit', [ReserverenController::class, 'edit'])->name('reserveren.edit');
-    Route::put('/reserveren/{id}', [ReserverenController::class, 'update'])->name('reserveren.update');
+    Route::get('/Wessel', [WesselMedewerkersController::class, 'indexPakket'])->name('Wessel.index');
+    Route::get('/Wessel/edit/{id}', [WesselMedewerkersController::class, 'edit'])->name('Wessel.edit');
+    Route::put('/Wessel/update/{id}', [WesselMedewerkersController::class, 'updatePakket'])->name('Wessel.update');
 });
 
 Route::middleware(['auth', 'role'])->group(function () {

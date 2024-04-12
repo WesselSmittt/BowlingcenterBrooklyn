@@ -32,6 +32,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('Wessel.index')" :active="request()->routeIs('menu.index')">
+                        {{ __('Wessel') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if(Auth::check() && Auth::user()->role_id == 2)
                     <x-nav-link :href="route('medewerkers.index')" :active="request()->routeIs('medewerkers.index')">
                         {{ __('Medewerkers dashboard') }}

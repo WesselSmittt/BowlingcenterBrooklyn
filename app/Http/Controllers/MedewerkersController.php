@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PakketOptie;
 use App\Models\User;
 use App\Models\Reserveren;
+use App\Models\PakketOptie;
+use App\Models\Reservation;
+use App\Models\Reservering;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Reservering;
 
 
 class MedewerkersController extends Controller
 {
-    // Retrieves all the Reservations from the database and puts them in a variable and gets used in the index view.
-
-
     public function index()
     {
         $allReservations = DB::table('reservations')
@@ -59,54 +57,33 @@ class MedewerkersController extends Controller
     // Retrieves a specific reservation from the database and sends it to the edit view.
 
 
-    public function editMedewerker($id, $request)
+    public function edit($id)
     {
+        $reservation = Reservation::find($id);
 
-        try {
-            $validatedData = $request->validate([
-                'tariff_id' => 'required|integer',
-                'start_time' => 'required|date_format:Y-m-d\TH:i',
-                'end_time' => 'required|date_format:Y-m-d\TH:i',
-                'total_childs' => 'required|integer',
-                'total_adults' => 'required|integer',
-                'menu_id' => 'required|integer',
-                'user_id' => 'required|integer',
-            ]);
+        // Pass the reservation to the view
+        return view('reservation.edit', compact('reservation'));
+    }
 
-            DB::table('reservations')
-                ->where('id', $id)
-                ->update($validatedData);
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'tariff_id' => 'required|integer',
+            'start_time' => 'required|date_format:Y-m-d\TH:i',
+            'end_time' => 'required|date_format:Y-m-d\TH:i',
+            'total_childs' => 'required|integer',
+            'total_adults' => 'required|integer',
+            'menu_id' => 'required|integer',
+            'user_id' => 'required|integer',
+        ]);
 
-            return redirect()->route('medewerkers.index')->with('success', 'Reservation updated successfully');
-        } catch (\Exception $e) {
-            // If an exception is caught, redirect back with an error message
-            return redirect()->back()->with('error', 'De updates konden niet worden toegepast vanwege een technisch probleem. Probeer het later opnieuw of neem contact op met de technische ondersteuning voor hulp.');
-        }
+        DB::table('reservations')
+            ->where('id', $id)
+            ->update($validatedData);
+
+        // Redirect or return response
     }
     // Deletes a specific reservation from the database, then redirects to the index view with a success message.
-
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-
-    public function updatePakket(Request $request, $id)
-    {
-        $reservering = Reservering::find($id);
-        $pakket_optie = PakketOptie::find($request->input('optiepakket_id'));
-
-        // Controleer of het pakket_optie_id "4" is en er kinderen in de reservering zijn
-        if ($reservering->aantal_kinderen > 0 && $pakket_optie->id == 4) {
-            return redirect()->back()->with('error', 'Het optiepakket ' . $pakket_optie->naam . ' is niet bedoeld voor kinderen');
-        }
-
-        $reservering->pakket_optie_id = $pakket_optie->id;
-        $reservering->save();
-
-        return redirect()->route('medewerkers.index')->with('success', 'Reservering succesvol bijgewerkt');
-    }
-
     /**
      * Remove the specified resource from storage.
      */
