@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
+
 class MedewerkersController extends Controller
 {
     public function index()
@@ -62,7 +63,7 @@ class MedewerkersController extends Controller
         $reservation = Reservation::find($id);
 
         // Pass the reservation to the view
-        return view('reservation.edit', compact('reservation'));
+        return view('medewerkers.edit', compact('reservation'));
     }
 
     public function update(Request $request, $id)
@@ -81,7 +82,7 @@ class MedewerkersController extends Controller
             ->where('id', $id)
             ->update($validatedData);
 
-        // Redirect or return response
+        return redirect()->route('medewerkers.index')->with('success', 'Reservation updated successfully');
     }
     // Deletes a specific reservation from the database, then redirects to the index view with a success message.
     /**
