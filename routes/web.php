@@ -59,6 +59,7 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::delete('/reservation/{id}', [MedewerkersController::class, 'destroy'])->name('reservation.destroy');
     Route::get('/users', [MedewerkersController::class, 'show'])->name('users.show');
     Route::post('/users/{id}/make-medewerker', [MedewerkersController::class, 'makeMedewerker'])->name('users.make-medewerker');
+    Route::post('/users/{id}/make-klant', [App\Http\Controllers\MedewerkersController::class, 'makeKlant'])->name('users.make-klant');
 });
 
 Route::middleware('auth')->group(function () {
