@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReserverenController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\ReserveringenController;
+use App\Http\Controllers\DylanMedewerkerController;
 
 
 /*
@@ -30,12 +31,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/medewerker', [App\Http\Controllers\MedewerkerController::class, 'index'])->name('medewerker.index');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [ReserveringenController::class, 'show'])->name('dashboard');
-    Route::get('/reservations/{id}/edit', [ReserveringenController::class, 'edit'])->name('reservations.edit');
-    Route::put('/reservations/{id}', [ReserveringenController::class, 'update'])->name('reservations.update');
+    Route::get('/dylan', [DylanMedewerkerController::class, 'index'])->name('dylan.index');
+    Route::get('/dylan/show', [DylanMedewerkerController::class, 'show'])->name('dylan.show');
+    Route::get('/dylan/edit/{id}', [DylanMedewerkerController::class, 'edit'])->name('dylan.edit');
+    Route::post('/dylan/update/{id}', [DylanMedewerkerController::class, 'update'])->name('dylan.update');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
