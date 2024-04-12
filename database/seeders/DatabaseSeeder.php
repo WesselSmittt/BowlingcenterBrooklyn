@@ -28,5 +28,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ReservationTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(TariffTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        // Add more seeders as needed
+
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }

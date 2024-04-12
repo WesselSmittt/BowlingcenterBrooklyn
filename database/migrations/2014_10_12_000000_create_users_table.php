@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->date('birthdate')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('role')->default('klant');
+            $table->foreignId('role_id')->default(1)->constrained('roles');
             $table->timestamps();
         });
     }

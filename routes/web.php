@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ScoresController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Medewerkers;
 use Illuminate\Support\Facades\Route;
 
 
@@ -53,15 +54,36 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reserveren/{id}', [ReserverenController::class, 'destroy'])->name('reserveren.destroy');
     Route::get('/reserveren/{id}/edit', [ReserverenController::class, 'edit'])->name('reserveren.edit');
     Route::put('/reserveren/{id}', [ReserverenController::class, 'update'])->name('reserveren.update');
-
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medewerkers.index');
-    Route::get('/medewerkers/reservering/{id}/edit', [MedewerkersController::class, 'edit'])->name('reserveringen.edit');
-    Route::put('/medewerkers/reservering/{id}', [MedewerkersController::class, 'update'])->name('reserveringen.update');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/mederwerkers/user/{id}', [MedewerkersController::class, 'userReservations'])->name('allreservations.user');
+    Route::get('reservation/edit/{id}', [MedewerkersController::class, 'edit'])->name('reservation.edit');
+    Route::put('medewerkers/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.update');
+    Route::delete('/reservation/{id}', [MedewerkersController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/users', [MedewerkersController::class, 'show'])->name('users.show');
+    Route::post('/users/{id}/make-medewerker', [MedewerkersController::class, 'makeMedewerker'])->name('users.make-medewerker');
+    Route::post('/users/{id}/make-klant', [App\Http\Controllers\MedewerkersController::class, 'makeKlant'])->name('users.make-klant');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/reserveren', [ReserverenController::class, 'index'])->name('reserveren.index');
+    Route::post('/reserveren', [ReserverenController::class, 'store'])->name('reserveren.store');
+    Route::get('/reserveren/{id}', [ReserverenController::class, 'show'])->name('reserveren.show');
+    Route::delete('/reserveren/{id}', [ReserverenController::class, 'destroy'])->name('reserveren.destroy');
+    Route::get('/reserveren/{id}/edit', [ReserverenController::class, 'edit'])->name('reserveren.edit');
+    Route::put('/reserveren/{id}', [ReserverenController::class, 'update'])->name('reserveren.update');
+});
+
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medewerkers.index');
+    Route::get('/mederwerkers/user/{id}', [MedewerkersController::class, 'userReservations'])->name('allreservations.user');
+    Route::get('reservation/edit/{id}', [MedewerkersController::class, 'edit'])->name('reservation.edit');
+    Route::put('medewerkers/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.update');
+    Route::delete('/reservation/{id}', [MedewerkersController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/users', [MedewerkersController::class, 'show'])->name('users.show');
+    Route::post('/users/{id}/make-medewerker', [MedewerkersController::class, 'makeMedewerker'])->name('users.make-medewerker');
+    Route::post('/users/{id}/make-klant', [App\Http\Controllers\MedewerkersController::class, 'makeKlant'])->name('users.make-klant');
 });
 
 Route::middleware('auth')->group(function () {
@@ -71,7 +93,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reserveren/{id}', [ReserverenController::class, 'destroy'])->name('reserveren.destroy');
     Route::get('/reserveren/{id}/edit', [ReserverenController::class, 'edit'])->name('reserveren.edit');
     Route::put('/reserveren/{id}', [ReserverenController::class, 'update'])->name('reserveren.update');
-
 });
 
 Route::middleware('auth')->group(function () {
@@ -85,12 +106,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/games', [GameController::class, 'index'])->name('games.index');
     Route::get('/games/{id}', [GameController::class, 'show']);
     Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
-    
+
     Route::post('/scores', [ScoreController::class, 'store']);
-    
+
     Route::get('/players/{player_id}/scores', [PlayerController::class, 'scores'])->name('player.scores');
     Route::get('/players', [ScoreController::class, 'getPlayersByGame'])->name('players.by_game');
-    
+
     Route::get('/scores/{score_id}/edit', [ScoreController::class, 'edit'])->name('scores.edit');
     Route::delete('/scores/{score_id}', [ScoreController::class, 'destroy'])->name('scores.destroy');
     Route::patch('/scores/{score_id}', [ScoreController::class, 'update'])->name('scores.update');
@@ -98,7 +119,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/scores', [ScoreController::class, 'store'])->name('scores.store');
 
 
-    
+
 
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -114,4 +135,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

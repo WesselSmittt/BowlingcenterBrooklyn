@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Reserveren;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,10 @@ class ReserverenController extends Controller
     public function index()
     {
         return view('reserveren.index');
- 
-    } 
+    }
 
     public function store(Request $request)
-    { 
+    {
         $reserveren = new Reserveren;
 
         $startTime = strtotime($request->start_time);
@@ -41,7 +41,7 @@ class ReserverenController extends Controller
             // Vrijdag t/m zondag van 22.00 uur tot 24.00 uur (magic bowlen)
             $reserveren->tariff_id = 3;
         }
-        
+
 
         $reserveren->user_id = Auth::id();
         $reserveren->start_time = $request->start_time;
@@ -63,19 +63,19 @@ class ReserverenController extends Controller
     }
 
     public function destroy($id)
-        {
-            $reserveren = Reserveren::find($id);
-            if ($reserveren) {
-                $reserveren->delete();
-                // Voeg een succesbericht toe aan de sessie
-                Session::flash('success', 'Reservering succesvol verwijderd');
-            } else {
-                // Voeg een foutbericht toe aan de sessie
-                Session::flash('error', 'Er is een fout opgetreden bij het verwijderen van de reservering');
-            }
-
-    return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
+    {
+        $reserveren = Reserveren::find($id);
+        if ($reserveren) {
+            $reserveren->delete();
+            // Voeg een succesbericht toe aan de sessie
+            Session::flash('success', 'Reservering succesvol verwijderd');
+        } else {
+            // Voeg een foutbericht toe aan de sessie
+            Session::flash('error', 'Er is een fout opgetreden bij het verwijderen van de reservering');
         }
+
+        return redirect()->route('dashboard')->with('status', 'Reservation cancelled successfully!');
+    }
 
     public function edit($id)
     {
