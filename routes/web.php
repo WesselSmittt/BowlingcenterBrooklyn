@@ -35,6 +35,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->group(function () {
     Route::get('/dylan', [DylanMedewerkerController::class, 'index'])->name('dylan.index');
     Route::get('/dylan/show', [DylanMedewerkerController::class, 'show'])->name('dylan.show');
     Route::get('/dylan/edit/{id}', [DylanMedewerkerController::class, 'edit'])->name('dylan.edit');
