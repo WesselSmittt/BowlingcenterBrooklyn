@@ -52,7 +52,7 @@ class ReserverenController extends Controller
         $reserveren->calculatePrice();
         $reserveren->save();
 
-        return redirect('dashboard');
+        return redirect('dashboard')->with('success', 'Reservation created successfully');
     }
 
     public function show($id)
